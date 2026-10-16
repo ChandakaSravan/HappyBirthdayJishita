@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jishita! ✨</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rosegold: {
+                            100: '#FFF0F5',
+                            200: '#FADADD',
+                            300: '#F4C2C2',
+                            400: '#E8A7A1',
+                            500: '#B76E79',
+                            600: '#A05963',
+                        },
+                        champagne: {
+                            100: '#FFFDF0',
+                            300: '#F7E7CE',
+                            400: '#E6C687',
+                            500: '#D4AF37',
+                        },
+                        plum: {
+                            800: '#230A28',
+                            900: '#140417',
+                            950: '#0B020D',
+                        }
+                    },
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif'],
+                        script: ['Dancing Script', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at 50% 20%, #2a0833 0%, #17031e 50%, #0b020d 100%);
+            color: #f8fafc;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .glass-rose {
+            background: rgba(183, 110, 121, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 194, 194, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-gold {
+            background: rgba(212, 175, 55, 0.06);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(230, 198, 135, 0.35);
+            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.15);
+        }
+
+        .text-glow-rosegold {
+            background: linear-gradient(135deg, #FFE4E1 0%, #F4C2C2 40%, #B76E79 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 35px rgba(183, 110, 121, 0.5);
+        }
+
+        .text-glow-champagne {
+            background: linear-gradient(135deg, #FFFDF0 0%, #F7E7CE 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes candleFlame {
+            0%, 100% { transform: scale(1) rotate(-1deg); opacity: 0.95; filter: drop-shadow(0 0 10px #ffb703); }
+            25% { transform: scale(1.1) rotate(2deg); opacity: 1; filter: drop-shadow(0 0 16px #ff8c00); }
+            50% { transform: scale(0.92) rotate(-2deg); opacity: 0.85; filter: drop-shadow(0 0 8px #ffd700); }
+            75% { transform: scale(1.05) rotate(1deg); opacity: 1; filter: drop-shadow(0 0 14px #ff5722); }
+        }
+
+        .flame-animation {
+            animation: candleFlame 1.1s infinite ease-in-out;
+            transform-origin: center bottom;
+        }
+
+        @keyframes floatUpSlow {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(4deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .animate-float {
+            animation: floatUpSlow 7s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+            animation: floatUpSlow 9s ease-in-out infinite 2.5s;
+        }
+
+        .shimmer-box {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -70%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 240, 245, 0.2) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: all 0.8s ease;
+        }
+        .shimmer-box:hover::after {
+            left: 130%;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b020d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(183, 110, 121, 0.4);
+            border-radius: 4px;
+        }
+
+        .video-glow-frame {
+            box-shadow: 0 0 50px rgba(183, 110, 121, 0.3), 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen selection:bg-rosegold-500 selection:text-white">
+
+    <!-- Floating Background Decor Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-12 left-6 md:left-24 text-4xl sm:text-6xl opacity-25 animate-float">🎈</div>
+        <div class="absolute top-1/3 right-8 md:right-28 text-5xl sm:text-7xl opacity-20 animate-float-delayed">👑</div>
+        <div class="absolute bottom-28 left-12 text-5xl sm:text-6xl opacity-25 animate-float">✨</div>
+        <div class="absolute top-2/3 right-1/4 text-4xl opacity-20 animate-float-delayed">💖</div>
+        <div class="absolute top-1/4 left-1/3 text-5xl opacity-15 animate-float">🌸</div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span class="font-cinzel text-xl sm:text-2xl text-rosegold-300 font-bold tracking-wider">JISHITA</span>
+            <span class="bg-rosegold-500/20 text-rosegold-200 text-xs px-3 py-1 rounded-full border border-rosegold-400/30 font-mono">Birthday Edition</span>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <button onclick="launchConfettiBurst()" class="glass-rose hover:bg-rosegold-500/20 text-rosegold-200 px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 border border-rosegold-400/40 flex items-center space-x-2 shadow-lg">
+                <i class="fas fa-wand-magic-sparkles text-rosegold-300"></i>
+                <span class="hidden sm:inline">Celebration Magic</span>
+            </button>
+            
+            <a href="#boutiqueSection" class="glass-gold hover:bg-champagne-500/20 text-champagne-300 px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 border border-champagne-400/40 flex items-center space-x-2 shadow-lg">
+                <i class="fas fa-video text-champagne-400"></i>
+                <span class="hidden sm:inline">Video Boutique</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-8">
+
+        <!-- 1. HERO HEADER & GREETING -->
+        <section class="text-center pt-8 md:pt-14 pb-8 flex flex-col items-center justify-center min-h-[70vh] relative">
+            
+            <div class="inline-flex items-center space-x-2 px-5 py-2 rounded-full glass-gold text-champagne-300 text-xs sm:text-sm font-medium mb-8 animate-bounce border border-champagne-400/40">
+                <i class="fas fa-crown text-champagne-400"></i>
+                <span>Celebrating The Queen Of The Day</span>
+                <i class="fas fa-sparkles text-champagne-400"></i>
+            </div>
+
+            <h1 class="font-cinzel text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-4">
+                <span class="block text-glow-rosegold">HAPPY BIRTHDAY</span>
+                <span class="block text-glow-champagne font-script text-5xl sm:text-8xl md:text-9xl mt-2 sm:mt-4 capitalize">Jishita!</span>
+            </h1>
+
+            <p class="max-w-2xl text-base sm:text-xl text-rosegold-100 font-light leading-relaxed my-8 px-4">
+                "May your special day shine with radiance, beauty, laughter, and unforgettable magic!"
+            </p>
+
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                <button onclick="launchConfettiBurst()" class="shimmer-box px-8 py-4 bg-gradient-to-r from-rosegold-500 via-pink-600 to-champagne-500 hover:from-rosegold-400 hover:to-champagne-400 text-white font-bold rounded-2xl shadow-[0_0_35px_rgba(183,110,121,0.5)] transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 flex items-center space-x-3 text-base sm:text-lg">
+                    <i class="fas fa-wand-magic-sparkles text-xl"></i>
+                    <span>Shower Celebrations!</span>
+                </button>
+
+                <a href="#cakeSection" class="px-8 py-4 glass-rose hover:bg-rosegold-500/20 text-rosegold-100 font-medium rounded-2xl border border-rosegold-400/40 transition-all duration-300 flex items-center space-x-3 text-base sm:text-lg">
+                    <i class="fas fa-birthday-cake text-champagne-400"></i>
+                    <span>Blow Candles & Wish</span>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- 2. FULLSCREEN VIDEO BOUTIQUE & SHOWCASE -->
+        <section id="boutiqueSection" class="scroll-mt-12 space-y-12">
+            
+            <div class="text-center space-y-3">
+                <span class="text-xs font-bold tracking-widest text-champagne-400 uppercase bg-champagne-500/10 px-4 py-1.5 rounded-full border border-champagne-400/30">Exclusive Video Showcase</span>
+                <h2 class="text-3xl sm:text-5xl font-cinzel font-bold text-glow-rosegold">Jishita's Birthday Reel</h2>
+                <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto">Tap the video player below or click fullscreen to watch!</p>
+            </div>
+
+            <!-- Video Player Card Container -->
+            <div class="glass-rose p-4 sm:p-8 rounded-3xl border border-rosegold-400/30 relative overflow-hidden video-glow-frame">
+                
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-rose-500 animate-ping"></span>
+                        <span class="text-xs sm:text-sm font-semibold text-rosegold-200">Featured Video Reel</span>
+                    </div>
+                    <button onclick="triggerFullscreenVideo()" class="text-xs bg-champagne-500/20 hover:bg-champagne-500/30 text-champagne-300 px-3 py-1.5 rounded-full border border-champagne-400/40 font-medium transition-all flex items-center space-x-1">
+                        <i class="fas fa-expand text-champagne-400"></i>
+                        <span>Click to Fullscreen</span>
+                    </button>
+                </div>
+
+                <!-- Video Frame with On-Click Fullscreen Action -->
+                <div id="videoWrapper" onclick="triggerFullscreenVideo()" class="relative w-full rounded-2xl overflow-hidden bg-black/80 aspect-video flex items-center justify-center border border-white/10 shadow-2xl group cursor-pointer">
+                    
+                    <!-- Embedded Video (`IMG_1722.mov`) -->
+                    <video id="birthdayVideo" class="w-full h-full object-cover" controls playsinline>
+                        <source src="vid.mov" type="video/quicktime">
+                        <source src="vid.mov" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+
+                    <!-- Click Overlay Button Badge -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-950/80 via-transparent to-plum-950/30 pointer-events-none flex flex-col justify-center items-center transition-opacity duration-300 group-hover:opacity-90">
+                        <div class="w-20 h-20 rounded-full bg-rosegold-500/90 text-white flex items-center justify-center text-3xl shadow-[0_0_40px_rgba(183,110,121,0.8)] transform group-hover:scale-110 transition-transform mb-3 border border-white/30">
+                            <i class="fas fa-play ml-1"></i>
+                        </div>
+                        <span class="bg-black/60 backdrop-blur-md text-champagne-300 text-xs sm:text-sm px-4 py-2 rounded-full font-semibold border border-champagne-400/40 shadow-lg">
+                            <i class="fas fa-expand mr-1.5"></i> Tap To Open Fullscreen Video
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Boutique Memory Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+
+                <div class="shimmer-box glass-rose rounded-2xl p-6 border border-rosegold-400/30 hover:border-champagne-400 transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-rosegold-500 to-pink-600 flex items-center justify-center text-white text-2xl mb-4 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl font-bold text-champagne-300 mb-2">Elegance & Grace</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        To Jishita, someone who radiates grace wherever she goes. May your path always be as bright and sparkling as your smile!
+                    </p>
+                </div>
+
+                <div class="shimmer-box glass-rose rounded-2xl p-6 border border-rosegold-400/30 hover:border-champagne-400 transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-champagne-500 to-amber-600 flex items-center justify-center text-white text-2xl mb-4 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl font-bold text-champagne-300 mb-2">Unwrap Happiness</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Sending you virtual gift boxes loaded with endless laughter, cherished moments, and lifetime memories!
+                    </p>
+                </div>
+
+                <div class="shimmer-box glass-rose rounded-2xl p-6 border border-rosegold-400/30 hover:border-champagne-400 transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-rosegold-600 flex items-center justify-center text-white text-2xl mb-4 shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fas fa-heart font-bold"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl font-bold text-champagne-300 mb-2">Pure Joy & Love</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Wishing you 365 new days of pure excitement, success in everything you pursue, and boundless happiness!
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 3. INTERACTIVE CAKE & CANDLE BLOWING SECTION -->
+        <section id="cakeSection" class="scroll-mt-12 glass-rose rounded-3xl p-6 sm:p-12 text-center border border-rosegold-400/30 relative overflow-hidden">
+            
+            <div class="max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-bold tracking-widest text-rosegold-300 uppercase bg-rosegold-500/10 px-4 py-1.5 rounded-full border border-rosegold-400/30">Interactive Candle Blow</span>
+                <h2 class="text-3xl sm:text-5xl font-cinzel font-bold text-glow-champagne">Blow Out Jishita's Birthday Candles!</h2>
+                <p class="text-gray-300 text-sm sm:text-base">
+                    Click the "Blow Out Candles" button <span class="text-champagne-300 font-semibold">OR blow directly into your device microphone</span> to extinguish the flames and reveal a special wish!
+                </p>
+
+                <!-- Interactive SVG Birthday Cake Container -->
+                <div class="relative py-8 flex flex-col items-center justify-center">
+                    
+                    <div id="cakeContainer" class="relative w-72 sm:w-80 h-72 mx-auto flex items-end justify-center">
+                        
+                        <svg class="w-full h-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)]" viewBox="0 0 300 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="150" cy="210" rx="135" ry="14" fill="#E6C687" opacity="0.3"/>
+                            <ellipse cx="150" cy="200" rx="120" ry="12" fill="#FFFDF0" opacity="0.8"/>
+                            
+                            <path d="M45 135 C45 135, 45 190, 150 190 C255 190, 255 135, 255 135 L255 170 C255 185, 208 198, 150 198 C92 198, 45 185, 45 170 Z" fill="#3D0C41"/>
+                            <ellipse cx="150" cy="135" rx="105" ry="18" fill="#58125E"/>
+                            
+                            <path d="M45 135 Q 71 150, 97 135 Q 123 150, 150 135 Q 177 150, 203 135 Q 229 150, 255 135 L255 142 Q 229 157, 203 142 Q 177 157, 150 142 Q 123 157, 97 142 Q 71 157, 45 142 Z" fill="#B76E79"/>
+                            
+                            <path d="M68 85 C68 85, 68 130, 150 130 C232 130, 232 85, 232 85 L232 110 C232 123, 195 133, 150 133 C105 133, 68 123, 68 110 Z" fill="#E8A7A1"/>
+                            <ellipse cx="150" cy="85" rx="82" ry="15" fill="#FFF0F5"/>
+                            
+                            <ellipse cx="150" cy="83" rx="80" ry="13" fill="#FFFDF0"/>
+                            
+                            <circle cx="85" cy="83" r="4" fill="#D4AF37"/>
+                            <circle cx="118" cy="89" r="4" fill="#B76E79"/>
+                            <circle cx="150" cy="91" r="5" fill="#D4AF37"/>
+                            <circle cx="182" cy="89" r="4" fill="#B76E79"/>
+                            <circle cx="215" cy="83" r="4" fill="#D4AF37"/>
+                        </svg>
+
+                        <!-- Candle 1 -->
+                        <div id="candleContainer1" class="absolute bottom-[130px] left-[85px] flex flex-col items-center cursor-pointer" onclick="extinguishSingleCandle(1)">
+                            <div id="flame1" class="w-4 h-6 bg-gradient-to-t from-red-500 via-amber-400 to-yellow-100 rounded-full flame-animation mb-1"></div>
+                            <div class="w-2.5 h-10 bg-gradient-to-r from-rosegold-300 via-white to-rosegold-300 rounded-sm shadow-md"></div>
+                        </div>
+
+                        <!-- Candle 2 -->
+                        <div id="candleContainer2" class="absolute bottom-[140px] left-[125px] flex flex-col items-center cursor-pointer" onclick="extinguishSingleCandle(2)">
+                            <div id="flame2" class="w-4 h-6 bg-gradient-to-t from-red-500 via-amber-400 to-yellow-100 rounded-full flame-animation mb-1"></div>
+                            <div class="w-2.5 h-10 bg-gradient-to-r from-champagne-300 via-white to-champagne-300 rounded-sm shadow-md"></div>
+                        </div>
+
+                        <!-- Candle 3 -->
+                        <div id="candleContainer3" class="absolute bottom-[140px] right-[125px] flex flex-col items-center cursor-pointer" onclick="extinguishSingleCandle(3)">
+                            <div id="flame3" class="w-4 h-6 bg-gradient-to-t from-red-500 via-amber-400 to-yellow-100 rounded-full flame-animation mb-1"></div>
+                            <div class="w-2.5 h-10 bg-gradient-to-r from-rosegold-300 via-white to-rosegold-300 rounded-sm shadow-md"></div>
+                        </div>
+
+                        <!-- Candle 4 -->
+                        <div id="candleContainer4" class="absolute bottom-[130px] right-[85px] flex flex-col items-center cursor-pointer" onclick="extinguishSingleCandle(4)">
+                            <div id="flame4" class="w-4 h-6 bg-gradient-to-t from-red-500 via-amber-400 to-yellow-100 rounded-full flame-animation mb-1"></div>
+                            <div class="w-2.5 h-10 bg-gradient-to-r from-champagne-300 via-white to-champagne-300 rounded-sm shadow-md"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex flex-wrap justify-center items-center gap-4 pt-4">
+                    <button onclick="blowAllCandles()" class="px-6 py-3 bg-gradient-to-r from-rosegold-500 to-pink-600 hover:from-rosegold-400 hover:to-pink-500 text-white font-semibold rounded-full shadow-lg transition-all flex items-center space-x-2 text-sm">
+                        <i class="fas fa-wind"></i>
+                        <span>Blow Out Candles</span>
+                    </button>
+
+                    <button id="micBlowBtn" onclick="enableMicBlowing()" class="px-6 py-3 glass-gold hover:bg-champagne-500/20 text-champagne-300 font-semibold rounded-full border border-champagne-400/40 transition-all flex items-center space-x-2 text-sm">
+                        <i class="fas fa-microphone text-champagne-400"></i>
+                        <span id="micBtnText">Use Microphone to Blow</span>
+                    </button>
+
+                    <button id="resetCandlesBtn" onclick="resetCandles()" class="hidden px-5 py-3 glass-rose text-rosegold-200 text-sm font-medium rounded-full border border-rosegold-400/30">
+                        <i class="fas fa-fire-flame-curved text-amber-400 mr-1"></i> Relight Candles
+                    </button>
+                </div>
+
+                <p id="cakeStatus" class="text-rosegold-200 font-medium text-base pt-2">
+                    🔥 Candles are lit! Make a wish for Jishita...
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- 4. MAKE A WISH & PERSONAL MESSAGE CARD -->
+        <section id="wishSection" class="space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-xs font-bold tracking-widest text-champagne-400 uppercase bg-champagne-500/10 px-4 py-1.5 rounded-full border border-champagne-400/30">Special Wish Note</span>
+                <h2 class="text-3xl sm:text-5xl font-cinzel font-bold text-glow-rosegold">Heartfelt Message For Jishita</h2>
+            </div>
+
+            <div class="glass-rose p-8 sm:p-12 rounded-3xl border border-rosegold-400/40 relative overflow-hidden shadow-2xl">
+                <div class="max-w-3xl mx-auto space-y-6 relative z-10 text-center">
+                    <div class="w-16 h-16 rounded-full bg-champagne-500/20 border border-champagne-400/40 flex items-center justify-center mx-auto text-champagne-400 text-2xl shadow-inner">
+                        <i class="fas fa-heart font-bold"></i>
+                    </div>
+
+                    <h3 class="font-script text-3xl sm:text-5xl text-champagne-300">Dear Jishita,</h3>
+
+                    <p class="text-base sm:text-xl text-rosegold-100 font-light leading-relaxed italic">
+                        "On this beautiful day, may your life be filled with endless magic, unstoppable laughter, vibrant success, and all the love in the universe. Keep shining bright and inspiring everyone around you!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER SECTION -->
+        <footer class="text-center py-12 space-y-6 border-t border-white/10 relative z-10">
+            <h3 class="font-script text-3xl text-rosegold-300">Happy Birthday Jishita! 🎉</h3>
+            <p class="text-xs text-gray-400">Crafted specially for Jishita's Birthday Celebration ✨</p>
+        </footer>
+
+    </main>
+
+    <!-- SURPRISE WISH MODAL -->
+    <div id="wishModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-rose max-w-lg w-full rounded-3xl p-8 border border-champagne-400/50 space-y-6 text-center transform scale-95 transition-transform duration-300 shadow-2xl relative">
+            <div class="w-20 h-20 bg-champagne-500/20 rounded-full flex items-center justify-center mx-auto text-champagne-400 text-3xl border border-champagne-400/40 animate-bounce">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h3 class="text-2xl sm:text-4xl font-cinzel font-bold text-glow-champagne">Your Wish Is Granted! ✨</h3>
+            <p class="text-rosegold-100 text-base leading-relaxed">
+                Happy Birthday Jishita! May every single wish you made today turn into reality. Keep blooming and spreading light everywhere!
+            </p>
+            <button onclick="closeWishModal()" class="px-8 py-3 bg-gradient-to-r from-rosegold-500 to-champagne-500 hover:from-rosegold-400 hover:to-champagne-400 text-white font-bold rounded-full shadow-lg transition-all text-sm">
+                Close & Enjoy Celebration 🎉
+            </button>
+        </div>
+    </div>
+
+
+    <!-- FULLSCREEN MODAL BACKUP -->
+    <div id="fullscreenVideoModal" class="fixed inset-0 z-50 bg-black flex items-center justify-center hidden">
+        <button onclick="closeFullscreenModal()" class="absolute top-6 right-6 text-white text-3xl z-50 p-2 hover:text-rosegold-300">
+            <i class="fas fa-xmark"></i>
+        </button>
+        <video id="modalVideo" class="w-full h-full object-contain" controls>
+            <source src="IMG_1722.mov" type="video/quicktime">
+            <source src="IMG_1722.mov" type="video/mp4">
+        </video>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- Fullscreen Video Handler ---
+        function triggerFullscreenVideo() {
+            const video = document.getElementById('birthdayVideo');
+            video.play().catch(() => {});
+
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.webkitEnterFullscreen) {
+                video.webkitEnterFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            } else {
+                const modal = document.getElementById('fullscreenVideoModal');
+                const modalVid = document.getElementById('modalVideo');
+                modal.classList.remove('hidden');
+                modalVid.play();
+            }
+        }
+
+        function closeFullscreenModal() {
+            const modal = document.getElementById('fullscreenVideoModal');
+            const modalVid = document.getElementById('modalVideo');
+            modalVid.pause();
+            modal.classList.add('hidden');
+        }
+
+        // --- Confetti Burst ---
+        function launchConfettiBurst() {
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#B76E79', '#D4AF37', '#F4C2C2', '#FFF0F5', '#FFD700']
+            });
+        }
+
+        // --- Cake Candle Blowing ---
+        let extinguishedCount = 0;
+        let isMicActive = false;
+        let audioContext, analyser, microphone, javascriptNode;
+
+        function extinguishSingleCandle(candleNum) {
+            const flame = document.getElementById(`flame${candleNum}`);
+            if (flame && !flame.classList.contains('hidden')) {
+                flame.classList.add('hidden');
+                extinguishedCount++;
+                
+                if (extinguishedCount === 4) {
+                    onAllCandlesExtinguished();
+                }
+            }
+        }
+
+        function blowAllCandles() {
+            for (let i = 1; i <= 4; i++) {
+                extinguishSingleCandle(i);
+            }
+        }
+
+        function onAllCandlesExtinguished() {
+            document.getElementById('cakeStatus').innerHTML = "✨ All candles blown out! Make a wish, Jishita! 🎂";
+            document.getElementById('resetCandlesBtn').classList.remove('hidden');
+            launchConfettiBurst();
+            setTimeout(() => {
+                const modal = document.getElementById('wishModal');
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 600);
+        }
+
+        function closeWishModal() {
+            const modal = document.getElementById('wishModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+        }
+
+        function resetCandles() {
+            extinguishedCount = 0;
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`flame${i}`).classList.remove('hidden');
+            }
+            document.getElementById('cakeStatus').innerHTML = "🔥 Candles are lit! Make a wish for Jishita...";
+            document.getElementById('resetCandlesBtn').classList.add('hidden');
+        }
+
+        // Microphone detection for blowing candles
+        function enableMicBlowing() {
+            if (isMicActive) return;
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+                .then(stream => {
+                    isMicActive = true;
+                    document.getElementById('micBtnText').textContent = "Microphone Listening (Blow Now!)";
+                    document.getElementById('cakeStatus').innerHTML = "🎤 Blow into your phone mic to extinguish candles!";
+
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioContext.createAnalyser();
+                    microphone = audioContext.createMediaStreamSource(stream);
+                    javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+                    analyser.smoothingTimeConstant = 0.8;
+                    analyser.fftSize = 1024;
+
+                    microphone.connect(analyser);
+                    analyser.connect(javascriptNode);
+                    javascriptNode.connect(audioContext.destination);
+
+                    javascriptNode.onaudioprocess = function() {
+                        const array = new Uint8Array(analyser.frequencyBinCount);
+                        analyser.getByteFrequencyData(array);
+                        let values = 0;
+                        for (let i = 0; i < array.length; i++) {
+                            values += array[i];
+                        }
+                        const average = values / array.length;
+
+                        // Sound threshold for blowing
+                        if (average > 35 && extinguishedCount < 4) {
+                            blowAllCandles();
+                        }
+                    };
+                })
+                .catch(err => {
+                    alert("Microphone access was denied or is unavailable.");
+                });
+        }
+    </script>
+</body>
+</html>
